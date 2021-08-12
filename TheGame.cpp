@@ -12,36 +12,51 @@
 #include <string>
 #include <vector>
 using namespace std;
-int textSpeed;
 
-void displayText(std::string line) {
+void displayText(std::string line, int textSpeed, boolean newLine) {
 
     for (int i = 0; i < line.length(); i++) {
         cout << line.at(i);
         Sleep(textSpeed);
     }
-    cout << "\n";
+    if (newLine) {
+        cout << "\n";
+    }
+    else {
+        // Do Nothing
+    }
+}
+
+void startScreen() {
+    displayText("          -------------      -----   -----      -------------", 25, true);
+    displayText("          |           |      |   |   |   |      |            |", 25, true);
+    displayText("          -----   -----      |   |   |   |      |   |--------|", 25, true);
+    displayText("              |   |          |   -----   |      |   |--------|", 25, true);
+    displayText("              |   |          |   -----   |      |   |--------|", 25, true);
+    
 }
 
 int main() {    // START of Code
 
-    textSpeed = 50;
     std::string start;
     boolean begin = false;
 
     while (!begin) {
-        displayText("Would You Like To Play TheGame? ");
+        displayText("Would You Like To Play TheGame? ", 50, true);
         cin >> start;
         if (start == "yes") {
-
+            displayText("Downloading", 50, false);
+            //displayText("........", 1000, true);
+            displayText("Download Completed", 50, true);
+            startScreen();
         }
         else if (start == "no") {
-            displayText("Very Well");
+            displayText("Very Well", 50, false);
             Sleep(2000);
             exit(0);
         }
         else if (start == "maybe") {
-            displayText("Don't Be A Smartass!");
+            displayText("Don't Be A Smartass!", 50, true);
         }
     }
 }
