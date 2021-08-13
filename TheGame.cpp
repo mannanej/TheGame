@@ -13,11 +13,16 @@
 #include <vector>
 using namespace std;
 
-void displayText(std::string line, int textSpeed, boolean newLine) {
+void displayText(std::string line, int textSpeed, boolean newLine, boolean skipSpace) {
 
     for (int i = 0; i < line.length(); i++) {
-        cout << line.at(i);
-        Sleep(textSpeed);
+        if (line.at(i) == ' ' && skipSpace) {
+            cout << line.at(i);
+        }
+        else {
+            cout << line.at(i);
+            Sleep(textSpeed);
+        }
     }
     if (newLine) {
         cout << "\n";
@@ -28,12 +33,25 @@ void displayText(std::string line, int textSpeed, boolean newLine) {
 }
 
 void startScreen() {
-    displayText("          -------------      -----   -----      -------------", 25, true);
-    displayText("          |           |      |   |   |   |      |            |", 25, true);
-    displayText("          -----   -----      |   |   |   |      |   |--------|", 25, true);
-    displayText("              |   |          |   -----   |      |   |--------|", 25, true);
-    displayText("              |   |          |   -----   |      |   |--------|", 25, true);
-    
+    int speed = 20;
+    displayText("                                        .............      .....   .....      ..............", speed, true, true);
+    displayText("                                        .............      .....   .....      ..............", speed, true, true);
+    displayText("                                            .....          .....   .....      .....         ", speed, true, true);
+    displayText("                                            .....          .............      ..............", speed, true, true);
+    displayText("                                            .....          .............      ..............", speed, true, true);
+    displayText("                                            .....          .....   .....      .....         ", speed, true, true);
+    displayText("                                            .....          .....   .....      ..............", speed, true, true);
+    displayText("                                            .....          .....   .....      ..............", speed, true, true);
+    displayText("                                                                                            ", speed, true, true);
+    displayText("                                                                                            ", speed, true, true);
+    displayText("   .............                 ....               .......      .......      ..............", speed, true, true);
+    displayText(" ...............                ......              ..... ..    .. .....      ..............", speed, true, true);
+    displayText(".....                          ...  ...             .....   .. ..  .....      .....         ", speed, true, true);
+    displayText(".....                         ...     ...           .....    ...   .....      ..............", speed, true, true);
+    displayText(".....     ..........         ...       ...          .....          .....      ..............", speed, true, true);
+    displayText(".....       ........        ...............         .....          .....      .....         ", speed, true, true);
+    displayText(".................          ..................       .....          .....      ..............", speed, true, true);
+    displayText("  ............            ...              ...      .....          .....      ..............", speed, true, true);
 }
 
 int main() {    // START of Code
@@ -42,21 +60,21 @@ int main() {    // START of Code
     boolean begin = false;
 
     while (!begin) {
-        displayText("Would You Like To Play TheGame? ", 50, true);
+        displayText("Would You Like To Play TheGame? ", 50, true, false);
         cin >> start;
         if (start == "yes") {
-            displayText("Downloading", 50, false);
-            //displayText("........", 1000, true);
-            displayText("Download Completed", 50, true);
+            displayText("Downloading\n", 50, false, false);
             startScreen();
+            cout << "\n";
+            displayText("Download Complete", 50, true, false);
         }
         else if (start == "no") {
-            displayText("Very Well", 50, false);
+            displayText("Very Well", 50, false, false);
             Sleep(2000);
             exit(0);
         }
         else if (start == "maybe") {
-            displayText("Don't Be A Smartass!", 50, true);
+            displayText("Don't Be A Smartass!", 50, true, false);
         }
     }
 }
