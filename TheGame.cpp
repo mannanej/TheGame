@@ -12,7 +12,9 @@
 #include <string>
 #include <vector>
 using namespace std;
-std::string MyName, YourName, Location, Color, Movie, Book;
+
+// Global variables that can be used between functions
+std::string MyName, YourName, Location, Color, Movie, Book, Age;
 
 // Used to display the test slower, like an old console instead of instant
 void displayText(std::string line, int textSpeed, boolean newLine, boolean skipSpace) {
@@ -60,6 +62,7 @@ void startScreen() {
     return;
 }
 
+// Will change the color of future text to your selection
 void changeColor() {
 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -95,7 +98,10 @@ void changeColor() {
     }
 }
 
+// She is happy!
 void happyGreeting() {
+
+    std::string like;
 
     displayText("So, what is your favorite color?", 50, true, false);
     cin >> Color;
@@ -112,13 +118,14 @@ void happyGreeting() {
     displayText("Your favorite book is ", 50, false, false);
     displayText(Book, 50, false, false);
     displayText("? Interesting..", 50, true, false);
+    Sleep(3000);
     displayText("Well, have I got a suprise for you!", 50, true, false);
     displayText("Downloading", 50, false, false);
     displayText(". . . .", 1000, false, false);
     displayText("Error. Going to backlog..", 50, true, false);
     displayText("Wow, look! I found your favorite book!", 50, true, false);
     Sleep(2000);
-    displayText("Quantum Mechanics applied to Atoms and Light author Ph. W. Courteille | Source: USP – Universidade de São Paulo", 500, true, true);
+    displayText("Quantum Mechanics applied to Atoms and Light author Ph. W. Courteille | Source: USP – Universidade de São Paulo", 200, true, true);
     std::string book = "QuantumMechanics";
     book = "notepad \"" + book + "\"";
     system(book.c_str());
@@ -127,6 +134,22 @@ void happyGreeting() {
     displayText("Processing", 50, false, false);
     displayText(". . . .", 1000, true, false);
     changeColor();
+    displayText("Do you love it?!", 50, true, false);
+    cin >> like;
+    if (like == "yes") {
+        displayText("I'm glad you like it!", 50, true, false);
+    }
+    else {
+        displayText("Oh, ok.. I'll fix it...", 50, true, false);
+        std::string tempColor = Color;
+        Color = "White";
+        changeColor();
+        Color = tempColor;
+        displayText("Sorry...", 50, true, false);
+        displayText("I'll just....go...", 100, true, false);
+        exit(0);
+        // End
+    }
 }
 
 void begin() {
@@ -157,6 +180,7 @@ void begin() {
     displayText(YourName, 500, false, false);
     displayText("...", 1000, false, false);
     displayText(" Amazing! That has such a nice ring to it! How could I have forgotten..?", 50, true, false);
+    Sleep(2000);
     displayText("Anyway!", 50, true, false);
     displayText("Thank you for your help! You seem really sweet.", 50, true, false);
     displayText("Would you mind if I", 50, false, false);
@@ -172,7 +196,9 @@ void begin() {
             displayText("Oh", 50, false, false);
             displayText(".....", 2000, false, false);
             displayText("I see. Ok.", 500, false, false);
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            displayText("Then good riddance", 200, false, false);
+            exit(0);
+            // End
         }
     }
 }
@@ -206,9 +232,7 @@ int main() {
             displayText("Don't Be A Smartass!", 50, true, false);
         }
         else if (start == "test") {
-            std::string test = "TEST";
-            test = "notepad \"" + test + "\"";
-            system(test.c_str());
+            //ShellExecute(NULL, L"open", L"https://www.google.com/?gws_rd=ssl", NULL, NULL, SW_SHOWNORMAL);
         }
         else {
             cout << "Invalid Input\n";
