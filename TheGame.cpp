@@ -206,6 +206,14 @@ void begin() {
 // START of code
 int main() {
 
+    static CONSOLE_FONT_INFOEX  fontex;
+    fontex.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetCurrentConsoleFontEx(hOut, 0, &fontex);
+    fontex.FontWeight = 700;
+    fontex.dwFontSize.X = 20;
+    fontex.dwFontSize.Y = 20;
+    SetCurrentConsoleFontEx(hOut, NULL, &fontex);
     ::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);  // Gives a borderless window
     std::string start;
 
