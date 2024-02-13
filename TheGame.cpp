@@ -7,6 +7,7 @@
 #include <windows.h>
 #include <algorithm>
 #include <iostream>
+#include <cstring>
 #include <fstream>
 #include <cstdlib>
 #include <string>
@@ -35,6 +36,16 @@ void displayText(std::string line, int textSpeed, boolean newLine, boolean skipS
         // Do Nothing
         return;
     }
+}
+
+std::string makeLowerCase(std::string line) {
+
+    std::string newLine = "";
+
+    for (int i = 0; i < (signed int)line.length(); i++) {
+        newLine += tolower(line.at(i));
+    }
+    return newLine;
 }
 
 // Prints the start screen of "TheGame" in pixel art
@@ -220,6 +231,7 @@ int main() {
     while (true) {
         displayText("Would You Like To Play TheGame?", 50, true, false);
         cin >> start;
+        start = makeLowerCase(start);
         if (start == "yes") {
             displayText("Downloading", 50, true, false);
             startScreen();
@@ -233,11 +245,11 @@ int main() {
         }
         else if (start == "no") {
             displayText("Very Well", 50, false, false);
-            Sleep(2000);
+            Sleep(1000);
             exit(0);
         }
         else if (start == "maybe") {
-            displayText("Don't Be A Smartass!", 50, true, false);
+            displayText("Why Must You Be This Way? It's A Simple Yes Or No", 50, true, false);
         }
         else if (start == "test") {
             //ShellExecute(NULL, L"open", L"https://www.google.com/?gws_rd=ssl", NULL, NULL, SW_SHOWNORMAL);
